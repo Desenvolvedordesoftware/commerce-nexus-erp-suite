@@ -1,3 +1,4 @@
+
 import Layout from "@/components/layout/Layout";
 import {
   Card,
@@ -44,7 +45,7 @@ const mockCompanies: Company[] = [
 ];
 
 export default function Settings() {
-  const [selectedCompany, setSelectedCompany] = useState<Company>(mockCompanies[0]);
+  const [selectedCompany, setSelectedCompany] = useState<Company | undefined>(mockCompanies[0]);
 
   return (
     <Layout>

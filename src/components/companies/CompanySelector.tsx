@@ -9,6 +9,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -51,32 +52,34 @@ export function CompanySelector({ companies = [], selectedCompany, onCompanyChan
       <PopoverContent className="w-full p-0">
         <Command>
           <CommandInput placeholder="Buscar empresa..." />
-          <CommandEmpty>Nenhuma empresa encontrada.</CommandEmpty>
-          <CommandGroup>
-            {safeCompanies.map((company) => (
-              <CommandItem
-                key={company.id}
-                value={company.id}
-                onSelect={() => {
-                  onCompanyChange(company);
-                  setOpen(false);
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    selectedCompany?.id === company.id ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                <div className="flex flex-col">
-                  <span>{company.name}</span>
-                  <span className="text-xs text-muted-foreground">
-                    CNPJ: {company.cnpj}
-                  </span>
-                </div>
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandList>
+            <CommandEmpty>Nenhuma empresa encontrada.</CommandEmpty>
+            <CommandGroup>
+              {safeCompanies.map((company) => (
+                <CommandItem
+                  key={company.id}
+                  value={company.id}
+                  onSelect={() => {
+                    onCompanyChange(company);
+                    setOpen(false);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      selectedCompany?.id === company.id ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  <div className="flex flex-col">
+                    <span>{company.name}</span>
+                    <span className="text-xs text-muted-foreground">
+                      CNPJ: {company.cnpj}
+                    </span>
+                  </div>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>
