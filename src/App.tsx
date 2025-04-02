@@ -26,7 +26,7 @@ const App = () => (
           <Route path="/sales" element={<Sales />} />
           <Route path="/settings" element={<Settings />} />
           
-          {/* Novas rotas serão implementadas conforme os módulos forem desenvolvidos */}
+          {/* Routes to be implemented in future updates */}
           <Route path="/pos" element={<NotFound />} />
           <Route path="/purchases" element={<NotFound />} />
           <Route path="/invoices" element={<NotFound />} />
