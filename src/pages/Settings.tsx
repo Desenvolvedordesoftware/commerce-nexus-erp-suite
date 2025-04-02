@@ -1,4 +1,3 @@
-
 import Layout from "@/components/layout/Layout";
 import {
   Card,
@@ -19,17 +18,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
+import { CompanySelector, Company } from "@/components/companies/CompanySelector";
+
+// Mock company data
+const mockCompanies: Company[] = [
+  {
+    id: "1",
+    name: "Empresa Demo",
+    cnpj: "00.000.000/0001-00",
+    isActive: true,
+  },
+  {
+    id: "2",
+    name: "Filial 1",
+    cnpj: "00.000.000/0002-00",
+    isActive: true,
+  },
+  {
+    id: "3",
+    name: "Loja Virtual",
+    cnpj: "00.000.000/0003-00",
+    isActive: false,
+  },
+];
 
 export default function Settings() {
+  const [selectedCompany, setSelectedCompany] = useState<Company>(mockCompanies[0]);
+
   return (
     <Layout>
       <div className="space-y-6">
         <h1 className="erp-page-title">Configurações</h1>
 
+        <div className="mb-6">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle>Empresa Ativa</CardTitle>
+              <CardDescription>Selecione a empresa para configurar</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <CompanySelector 
+                companies={mockCompanies} 
+                selectedCompany={selectedCompany} 
+                onCompanyChange={setSelectedCompany} 
+              />
+            </CardContent>
+          </Card>
+        </div>
+
         <Tabs defaultValue="company">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="company">Empresa</TabsTrigger>
             <TabsTrigger value="fiscal">Fiscal</TabsTrigger>
+            <TabsTrigger value="pdv">PDV</TabsTrigger>
             <TabsTrigger value="users">Usuários</TabsTrigger>
             <TabsTrigger value="system">Sistema</TabsTrigger>
           </TabsList>
@@ -162,6 +204,117 @@ export default function Settings() {
                     <Input id="certificatePassword" type="password" />
                   </div>
                   
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="mdfe" />
+                      <Label htmlFor="mdfe">Emite MDF-e</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="cte" />
+                      <Label htmlFor="cte">Emite CT-e</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="cteos" />
+                      <Label htmlFor="cteos">Emite CT-e OS</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="sat" />
+                      <Label htmlFor="sat">Utiliza SAT</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="ibptTable">Tabela IBPT</Label>
+                    <Input id="ibptTable" type="file" />
+                  </div>
+                  
+                  <div className="flex justify-end">
+                    <Button>Salvar Configurações</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="pdv" className="space-y-4 py-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Configuração do PDV</CardTitle>
+                <CardDescription>
+                  Configure os parâmetros do Ponto de Venda
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="posType">Tipo de PDV</Label>
+                    <Select>
+                      <SelectTrigger id="posType">
+                        <SelectValue placeholder="Selecione o tipo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="nfce">NFC-e</SelectItem>
+                        <SelectItem value="sat">SAT</SelectItem>
+                        <SelectItem value="nonfiscal">Não Fiscal (MEI)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="printer">Impressora</Label>
+                    <Select>
+                      <SelectTrigger id="printer">
+                        <SelectValue placeholder="Selecione a impressora" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="epson">Epson TM-T20</SelectItem>
+                        <SelectItem value="bematech">Bematech MP-4200</SelectItem>
+                        <SelectItem value="daruma">Daruma DR800</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="useScale" />
+                      <Label htmlFor="useScale">Utiliza Balança</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="scaleModel">Modelo da Balança</Label>
+                    <Select>
+                      <SelectTrigger id="scaleModel">
+                        <SelectValue placeholder="Selecione o modelo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="toledo">Toledo Prix 3</SelectItem>
+                        <SelectItem value="filizola">Filizola MF</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="scalePort">Porta da Balança</Label>
+                    <Input id="scalePort" placeholder="COM1" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="useTef" />
+                      <Label htmlFor="useTef">Utiliza TEF</Label>
+                    </div>
+                  </div>
+                  
                   <div className="flex justify-end">
                     <Button>Salvar Configurações</Button>
                   </div>
@@ -217,6 +370,30 @@ export default function Settings() {
                       <Checkbox id="darkMode" />
                       <Label htmlFor="darkMode">Modo Escuro</Label>
                     </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="enableWhatsApp" />
+                      <Label htmlFor="enableWhatsApp">Integração com WhatsApp</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="whatsappNumber">Número do WhatsApp</Label>
+                    <Input id="whatsappNumber" placeholder="55999999999" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="autoStartWhatsApp" />
+                      <Label htmlFor="autoStartWhatsApp">Iniciar WhatsApp automaticamente</Label>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="remoteBackupLocation">Backup em Nuvem</Label>
+                    <Input id="remoteBackupLocation" placeholder="https://backup.example.com" />
                   </div>
                   
                   <div className="flex justify-end">

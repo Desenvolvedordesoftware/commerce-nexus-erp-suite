@@ -1,5 +1,5 @@
 
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search, User, Building } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -16,6 +16,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b bg-background px-4 lg:px-6">
       <div className="flex flex-1 items-center gap-2 md:gap-4">
+        <div className="hidden md:flex items-center">
+          <Building className="h-5 w-5 mr-2 text-muted-foreground" />
+          <span className="text-sm font-medium">Empresa Demo</span>
+        </div>
         <div className="relative flex-1 md:max-w-sm">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -43,7 +47,7 @@ export default function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar>
-                <AvatarFallback>AD</AvatarFallback>
+                <AvatarFallback>OP</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
@@ -52,6 +56,7 @@ export default function Header() {
             <DropdownMenuSeparator />
             <DropdownMenuItem>Perfil</DropdownMenuItem>
             <DropdownMenuItem>Configurações</DropdownMenuItem>
+            <DropdownMenuItem>Mudar Empresa</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Sair</DropdownMenuItem>
           </DropdownMenuContent>

@@ -12,7 +12,17 @@ import {
   Store,
   Truck,
   FileSpreadsheet,
-  LogOut
+  LogOut,
+  Table,
+  Factory,
+  Printer,
+  ChefHat,
+  Boxes,
+  Archive,
+  Building,
+  CreditCard,
+  Calendar,
+  Phone
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -58,7 +68,7 @@ export default function Sidebar() {
     <div className="flex h-screen flex-col border-r bg-card px-3 py-4">
       <div className="mb-6 flex items-center px-3">
         <Store className="h-6 w-6 text-primary" />
-        <h1 className="ml-2 text-xl font-bold">Commerce Nexus</h1>
+        <h1 className="ml-2 text-xl font-bold">ACTHAUROS-ERP</h1>
       </div>
 
       <div className="flex-1 overflow-auto">
@@ -88,11 +98,47 @@ export default function Sidebar() {
             isActive={pathname.startsWith("/sales")}
           />
           <SidebarItem
+            to="/pos"
+            icon={<CreditCard className="h-5 w-5" />}
+            label="PDV"
+            isActive={pathname.startsWith("/pos")}
+          />
+          <SidebarItem
+            to="/purchases"
+            icon={<Boxes className="h-5 w-5" />}
+            label="Compras"
+            isActive={pathname.startsWith("/purchases")}
+          />
+          <SidebarItem
             to="/invoices"
             icon={<FileText className="h-5 w-5" />}
             label="Notas Fiscais"
             isActive={pathname.startsWith("/invoices")}
           />
+        </SidebarSection>
+
+        <SidebarSection title="Módulos Específicos">
+          <SidebarItem
+            to="/restaurant"
+            icon={<ChefHat className="h-5 w-5" />}
+            label="Restaurante"
+            isActive={pathname.startsWith("/restaurant")}
+          />
+          <SidebarItem
+            to="/transport"
+            icon={<Truck className="h-5 w-5" />}
+            label="Transportadoras"
+            isActive={pathname.startsWith("/transport")}
+          />
+          <SidebarItem
+            to="/service"
+            icon={<Table className="h-5 w-5" />}
+            label="Ordens de Serviço"
+            isActive={pathname.startsWith("/service")}
+          />
+        </SidebarSection>
+
+        <SidebarSection title="Financeiro">
           <SidebarItem
             to="/finance"
             icon={<DollarSign className="h-5 w-5" />}
@@ -100,20 +146,41 @@ export default function Sidebar() {
             isActive={pathname.startsWith("/finance")}
           />
           <SidebarItem
-            to="/suppliers"
-            icon={<Truck className="h-5 w-5" />}
-            label="Fornecedores"
-            isActive={pathname.startsWith("/suppliers")}
+            to="/receivables"
+            icon={<Archive className="h-5 w-5" />}
+            label="Contas a Receber"
+            isActive={pathname.startsWith("/receivables")}
           />
+          <SidebarItem
+            to="/payables"
+            icon={<Archive className="h-5 w-5" />}
+            label="Contas a Pagar"
+            isActive={pathname.startsWith("/payables")}
+          />
+        </SidebarSection>
+
+        <SidebarSection title="Relatórios">
           <SidebarItem
             to="/reports"
             icon={<FileSpreadsheet className="h-5 w-5" />}
             label="Relatórios"
             isActive={pathname.startsWith("/reports")}
           />
+          <SidebarItem
+            to="/commissions"
+            icon={<DollarSign className="h-5 w-5" />}
+            label="Comissões"
+            isActive={pathname.startsWith("/commissions")}
+          />
         </SidebarSection>
 
         <SidebarSection title="Sistema">
+          <SidebarItem
+            to="/companies"
+            icon={<Building className="h-5 w-5" />}
+            label="Empresas"
+            isActive={pathname.startsWith("/companies")}
+          />
           <SidebarItem
             to="/settings"
             icon={<Settings className="h-5 w-5" />}

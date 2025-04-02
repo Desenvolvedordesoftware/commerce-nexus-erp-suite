@@ -25,6 +25,21 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/sales" element={<Sales />} />
           <Route path="/settings" element={<Settings />} />
+          
+          {/* Novas rotas serão implementadas conforme os módulos forem desenvolvidos */}
+          <Route path="/pos" element={<NotFound />} />
+          <Route path="/purchases" element={<NotFound />} />
+          <Route path="/invoices" element={<NotFound />} />
+          <Route path="/restaurant" element={<NotFound />} />
+          <Route path="/transport" element={<NotFound />} />
+          <Route path="/service" element={<NotFound />} />
+          <Route path="/finance" element={<NotFound />} />
+          <Route path="/receivables" element={<NotFound />} />
+          <Route path="/payables" element={<NotFound />} />
+          <Route path="/reports" element={<NotFound />} />
+          <Route path="/commissions" element={<NotFound />} />
+          <Route path="/companies" element={<NotFound />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
