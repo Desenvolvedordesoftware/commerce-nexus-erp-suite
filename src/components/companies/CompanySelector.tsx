@@ -29,8 +29,11 @@ interface CompanySelectorProps {
   onCompanyChange: (company: Company) => void;
 }
 
-export function CompanySelector({ companies, selectedCompany, onCompanyChange }: CompanySelectorProps) {
+export function CompanySelector({ companies = [], selectedCompany, onCompanyChange }: CompanySelectorProps) {
   const [open, setOpen] = useState(false);
+  
+  // Ensure companies is always an array
+  const safeCompanies = Array.isArray(companies) ? companies : [];
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -50,7 +53,7 @@ export function CompanySelector({ companies, selectedCompany, onCompanyChange }:
           <CommandInput placeholder="Buscar empresa..." />
           <CommandEmpty>Nenhuma empresa encontrada.</CommandEmpty>
           <CommandGroup>
-            {companies.map((company) => (
+            {safeCompanies.map((company) => (
               <CommandItem
                 key={company.id}
                 value={company.id}
