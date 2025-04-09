@@ -22,7 +22,8 @@ import {
   Building,
   CreditCard,
   Calendar,
-  Phone
+  Phone,
+  UserCog
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -84,6 +85,12 @@ export default function Sidebar() {
             icon={<Users className="h-5 w-5" />}
             label="Clientes"
             isActive={pathname.startsWith("/customers")}
+          />
+          <SidebarItem
+            to="/employees"
+            icon={<UserCog className="h-5 w-5" />}
+            label="Funcionários"
+            isActive={pathname.startsWith("/employees")}
           />
           <SidebarItem
             to="/products"
